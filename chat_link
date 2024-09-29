@@ -1,0 +1,18 @@
+<!doctype html>
+<HTML>
+<HEAD>
+
+    <TITLE>My messenger</TITLE>
+</HEAD>
+<BODY>
+    <div  class="center">
+    <span>Посилання</span>
+    <button>Далі</button>  
+    <button>Копіювати</button>
+    </div>
+        
+  
+
+
+</BODY>
+</HTML>

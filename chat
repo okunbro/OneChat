@@ -1,0 +1,18 @@
+<!doctype html>
+<HTML>
+<HEAD>
+
+    <TITLE>My messenger</TITLE>
+</HEAD>
+<BODY>
+<div><span> чат чат чат</div></span>
+<div >
+    <input placeholder="Введіть повідомлення">
+    <input type="submit">
+</div>  
+        
+  
+
+
+</BODY>
+</HTML>
