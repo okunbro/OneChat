@@ -70,7 +70,7 @@ class ChatServer {
                      type: 'message',
                      data: {
                           sender: sender.username,
-                          message: msgObject.data
+                          message: decryptData(msgObject.data)
                      }
                });
            }
