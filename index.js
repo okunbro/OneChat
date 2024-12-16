@@ -13,21 +13,43 @@ function decryptData(encryptedData) {
     const decipher = crypto.createDecipheriv(encryptionMethod, key, encIv)
     return decipher.update(encryptedData, 'hex', 'utf8') + decipher.final('utf8')
 }
-const express = require('express');
-const path = require('path');
+const readline = require('node:readline');
 
-const app = express();
+const { ChatClient } = require('./client/ChatClient');
 
-// Налаштування статичної папки
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Маршрут для головної сторінки
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
 });
 
-const PORT = process.env.PORT || 8080;
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+const sessionIdIndex = process.argv.indexOf('--sessionId');
+const nameIndex = process.argv.indexOf('--name');
+
+if (sessionIdIndex === -1 && nameIndex === -1) {
+    console.error('Arguments sessionId or name are required');
+    process.exit(1);
+}
+
+const sessionId = sessionIdIndex !== -1 ? process.argv[sessionIdIndex + 1] : null;
+const name = nameIndex !== -1 ? process.argv[nameIndex + 1] : null;
+
+init(name, sessionId);
+
+
+function init(name, sessionId) {
+    const client = new ChatClient({ url: 'ws://localhost:8080', username: name, sessionId });
+    client.init();
+
+    const chatInput = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+    });
+    chatInput.on('line', (input) => {
+        if (input.trim().toLowerCase() === 'exit') {
+            chatInput.close();
+        } else {
+            client.send(input);
+        }
+    });
+}
