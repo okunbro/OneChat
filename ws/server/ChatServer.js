@@ -43,6 +43,14 @@ class ChatServer {
     }
 
     createClient(ws, msgObject) {
+        const isClientExists = this.clientsMap.get(msgObject.sessionId);
+        if (isClientExists) {
+            const client = this.clientsMap.get(msgObject.sessionId);
+            client.updateWS(ws);
+            console.log(`Client ${client.username} reconnected`);
+            return;
+        }
+
         const client = new Client({
             ws: ws,
             username: msgObject.data.username,
@@ -62,7 +70,7 @@ class ChatServer {
                      type: 'message',
                      data: {
                           sender: sender.username,
-                          message: msgObject.data
+                          message: decryptData(msgObject.data)
                      }
                });
            }
