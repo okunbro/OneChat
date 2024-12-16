@@ -15,7 +15,7 @@ function decryptData(encryptedData) {
 }
 const readline = require('node:readline');
 
-const { ChatClient } = require('./client/ChatClient');
+const { ChatClient } = require('./ws/client/ChatClient');
 
 const rl = readline.createInterface({
   input: process.stdin,
