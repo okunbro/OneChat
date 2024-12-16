@@ -12,7 +12,7 @@ const rl = readline.createInterface({
 const sessionIdIndex = process.argv.indexOf('--sessionId');
 const nameIndex = process.argv.indexOf('--name');
 const key = process.argv.indexOf('--key');
-const encIv  = process.argv.indexOf('--encIv');
+
 
 if (sessionIdIndex === -1 && nameIndex === -1) {
     console.error('Arguments sessionId or name are required');

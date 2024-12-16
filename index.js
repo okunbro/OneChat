@@ -1,8 +1,7 @@
 const crypto = require('node:crypto');
-const secretKey = 'aelwfhlaef';
-const secretIV = 'aifjaoeifjo';
 const encMethod = 'aes-256-cbc';
-
+const secretIV = 'aifjaoeifjo';
+const encIv = crypto.createHash('sha512').update(secretIV).digest('hex').substring(0,16)
 function encryptData (data) {
     const cipher = crypto.createCipheriv(encMethod, key, encIv)
     const encrypted = cipher.update(data, 'utf8', 'hex') + cipher.final('hex')

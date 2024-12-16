@@ -44,7 +44,7 @@ class ChatClient {
         this.sessionId = msgObject.sessionId;
         console.log('Your sessionId: ', this.sessionId);
     }
-    send(data=encryptData (data)) {
+    send(data=encryptData(data)) {
         const msgObject = {
             type: 'message',
             sessionId: this.sessionId,
